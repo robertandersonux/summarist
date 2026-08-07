@@ -11,6 +11,8 @@ import { auth } from "@/lib/firebase";
 import { RootState } from "@/lib/store";
 import { closeModal, switchView } from "@/lib/features/authModalSlice";
 import { useRouter } from "next/navigation";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 export default function AuthModal() {
   const dispatch = useDispatch();
@@ -76,6 +78,34 @@ const handleLogin = async () => {
   }
 };
 
+const handleGoogleLogin = async () => {
+  setError("");
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+    handleClose();
+    router.push("/for-you");
+  } catch {
+    setError("Google sign-in failed. Please try again.");
+  }
+};
+
+const [resetSent, setResetSent] = useState(false);
+
+const handleForgotPassword = async () => {
+  setError("");
+  if (!email) {
+    setError("Enter your email above first, then click 'Forgot password?'");
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    setResetSent(true);
+  } catch {
+    setError("Couldn't send reset email. Check the address and try again.");
+  }
+};
+
   return (
     <div className="modal--wrapper" onClick={handleClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -89,6 +119,10 @@ const handleLogin = async () => {
             <button className="btn modal__guest--btn" onClick={handleGuestLogin}>
               Login as a Guest
             </button>
+            <button className="btn modal__google--btn" onClick={handleGoogleLogin}>
+  <img src="/google.png" alt="Google" className="modal__google--icon" />
+  {view === "register" ? "Sign up with Google" : "Login with Google"}
+</button>
             <div className="modal__divider">
               <span>or</span>
             </div>
@@ -106,6 +140,13 @@ const handleLogin = async () => {
               onChange={(e) => setPassword(e.target.value)}
               className="modal__input"
             />
+            {resetSent ? (
+  <div className="modal__reset--sent">Password reset email sent — check your inbox.</div>
+) : (
+  <button className="modal__forgot--btn" onClick={handleForgotPassword}>
+    Forgot your password?
+  </button>
+)}
             {error && <div className="modal__error">{error}</div>}
             <button className="btn modal__submit--btn" onClick={handleRegister}>
               Sign up
@@ -122,6 +163,9 @@ const handleLogin = async () => {
             <div className="modal__title">Log in to Summarist</div>
             <button className="btn modal__guest--btn" onClick={handleGuestLogin}>
               Login as a Guest
+            </button>
+            <button className="btn modal__google--btn" onClick={handleGoogleLogin}>
+              Login with Google
             </button>
             <div className="modal__divider">
               <span>or</span>

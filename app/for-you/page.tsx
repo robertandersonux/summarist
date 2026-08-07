@@ -18,9 +18,8 @@ export default function ForYouPage() {
           fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended"),
           fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested"),
         ]);
-        const selectedData = await selectedRes.json();
-        console.log("Selected book data:", selectedData);
-        setSelected(selectedData);
+       const selectedData = await selectedRes.json();
+setSelected(Array.isArray(selectedData) ? selectedData[0] : selectedData);
         setRecommended(await recommendedRes.json());
         setSuggested(await suggestedRes.json());
       } catch (err) {
