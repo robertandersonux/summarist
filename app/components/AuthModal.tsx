@@ -21,7 +21,7 @@ const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+const [resetSent, setResetSent] = useState(false);
   if (!isOpen) return null;
 
  const handleClose = () => {
@@ -90,7 +90,6 @@ const handleGoogleLogin = async () => {
   }
 };
 
-const [resetSent, setResetSent] = useState(false);
 
 const handleForgotPassword = async () => {
   setError("");
