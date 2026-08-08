@@ -71,7 +71,7 @@ export default function PlayerPage() {
   if (loading) return <div className="player__loading">Loading...</div>;
   if (!book) return <div className="player__loading">Book not found.</div>;
 
-  return (
+   return (
     <div className="player">
       <div className="player__content">
         <div className="player__title">{book.title}</div>
@@ -79,7 +79,12 @@ export default function PlayerPage() {
       </div>
 
       <div className="player__bar">
-        <img src={book.imageLink} alt={book.title} className="player__bar--img" />
+        <img
+          src={book.imageLink}
+          alt={book.title}
+          className="player__bar--img"
+        />
+
         <div className="player__bar--details">
           <div className="player__bar--title">{book.title}</div>
           <div className="player__bar--author">{book.author}</div>
@@ -88,23 +93,28 @@ export default function PlayerPage() {
         <button className="player__bar--btn" onClick={() => skip(-10)}>
           &#8634; 10
         </button>
-        <button className="player__bar--btn player__bar--play" onClick={togglePlay}>
+        <button
+          className="player__bar--btn player__bar--play"
+          onClick={togglePlay}
+        >
           {isPlaying ? "❚❚" : "▶"}
         </button>
         <button className="player__bar--btn" onClick={() => skip(10)}>
           10 &#8635;
         </button>
 
-        <div className="player__bar--time">{formatTime(currentTime)}</div>
-        <input
-          type="range"
-          min={0}
-          max={duration || 0}
-          value={currentTime}
-          onChange={handleScrub}
-          className="player__bar--scrub"
-        />
-        <div className="player__bar--time">{formatTime(duration)}</div>
+        <div className="player__bar--track">
+          <div className="player__bar--time">{formatTime(currentTime)}</div>
+          <input
+            type="range"
+            min={0}
+            max={duration || 0}
+            value={currentTime}
+            onChange={handleScrub}
+            className="player__bar--scrub"
+          />
+          <div className="player__bar--time">{formatTime(duration)}</div>
+        </div>
 
         <audio
           ref={audioRef}
