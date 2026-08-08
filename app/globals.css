@@ -1404,3 +1404,322 @@ button:disabled {
   font-size: 13px;
   text-align: center;
 }
+/* ==========================================================================
+   MOBILE RESPONSIVE LAYER — append to the END of globals.css
+   Everything here is additive. No existing rules need to be removed.
+   Breakpoints: 768px (app shell collapses), 480px (small phones)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SIDEBAR TOGGLE + OVERLAY
+   These two elements are hidden on desktop and only appear under 768px.
+   Requires the JSX changes noted in chat.
+   -------------------------------------------------------------------------- */
+.sidebar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #032b41;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sidebar__overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 150;
+}
+
+/* --------------------------------------------------------------------------
+   TABLET / MOBILE — 768px and below
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* ---- App shell: sidebar goes off-canvas ---- */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 250ms ease;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar--open {
+    transform: translateX(0);
+  }
+
+  .sidebar__overlay--visible {
+    display: block;
+  }
+
+  .sidebar__toggle {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 12px;
+  z-index: 210;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #032b41;
+}
+
+  .app__main {
+    width: 100%;
+  }
+
+  .app__content {
+    padding: 20px 16px;
+  }
+
+  /* ---- Search bar ---- */
+ .search--wrapper {
+    padding: 12px 16px 12px 56px;
+  }
+
+  .search__input--wrapper {
+    max-width: none;
+  }
+
+  .search__results {
+    top: 60px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    max-height: 60vh;
+  }
+
+  /* ---- For You: selected book card stacks ---- */
+  .selected__book--wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .selected__book--subtitle {
+    font-size: 15px;
+  }
+
+  /* ---- Book grids: fixed 200px cards become a fluid 2-up grid ---- */
+  .recommended__book--wrapper,
+  .suggested__book--wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+  }
+
+  .book--wrapper {
+    width: 100%;
+  }
+
+  .book__img--wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* ---- Skeleton loaders must match the new grid ---- */
+  .skeleton--book-card {
+    width: 100%;
+  }
+
+  .skeleton--book-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .skeleton--selected {
+    height: 240px;
+  }
+
+  /* ---- Book detail: cover moves above the text ---- */
+  .book__header--wrapper {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  .book .book__img {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    aspect-ratio: 220 / 280;
+    margin: 0 auto;
+  }
+
+  .book .book__title {
+    font-size: 20px;
+  }
+
+  .book__meta--wrapper {
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .book__btn--wrapper {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .book__cta--btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 16px;
+  }
+
+  /* ---- Player bar: unpin from sidebar, wrap the scrubber ---- */
+  .player__bar {
+    left: 0;
+    padding: 10px 16px;
+    gap: 12px;
+    row-gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .player__bar--img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .player__bar--details {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .player__bar--title,
+  .player__bar--author {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .player__bar--btn {
+    padding: 6px;
+  }
+
+  .player__bar--time {
+    order: 3;
+    font-size: 11px;
+    min-width: 34px;
+  }
+
+  .player__bar--scrub {
+    order: 3;
+    flex: 1 1 180px;
+  }
+
+  /* Bar is now two rows tall — give the content room to clear it */
+  .player {
+    padding-bottom: 150px;
+  }
+
+  .player__title {
+    font-size: 19px;
+  }
+
+  .player__summary {
+    font-size: 14px;
+  }
+
+  /* ---- Settings ---- */
+  .settings__title {
+    font-size: 20px;
+  }
+
+  .settings__logged-out--img {
+    width: 100%;
+    max-width: 240px;
+  }
+
+  /* ---- Choose plan ---- */
+  .choose-plan {
+    padding: 24px 16px 60px;
+  }
+
+  .choose-plan__hero--title {
+    font-size: 22px;
+  }
+
+  .choose-plan__plan {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  /* ---- Auth modal ---- */
+  .modal {
+    padding: 32px 20px;
+    width: calc(100% - 32px);
+  }
+
+  /* ---- Shared ---- */
+  .row {
+    padding: 0 16px;
+  }
+
+  .btn {
+    min-width: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SMALL PHONES — 480px and below
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 230px;
+    min-width: 230px;
+  }
+
+  .recommended__book--wrapper,
+  .suggested__book--wrapper {
+    gap: 16px 12px;
+  }
+
+  .book__title {
+    font-size: 13px;
+  }
+
+  .selected__book--img {
+    width: 80px;
+    height: 104px;
+  }
+
+  .player__bar {
+    padding: 8px 12px;
+  }
+
+  .player__bar--play {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav__img--mask {
+    max-width: 150px;
+  }
+
+  .for-you__title {
+    font-size: 19px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Lock background scroll while the sidebar drawer is open.
+   Toggle this class on <body> from the same state that opens the sidebar.
+   -------------------------------------------------------------------------- */
+.body--no-scroll {
+  overflow: hidden;
+}
