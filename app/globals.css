@@ -1470,8 +1470,8 @@ button:disabled {
     display: block;
   }
 
-  .sidebar__toggle {
-  display: flex;
+ .sidebar__toggle {
+  display: none;
   position: fixed;
   top: 14px;
   left: 12px;
