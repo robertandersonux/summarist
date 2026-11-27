@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Summarist
 
-## Getting Started
+A book-summary app where you can browse titles, read a summary and listen to the audio version. Built in Next.js with Firebase sign-in for the Frontend Simplified program.
 
-First, run the development server:
+**Live:** https://summarist-tau-one.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Summarist home page](./public/screenshot.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Sign up or log in with email, Google or a one-click guest account
+- "For You" page with selected, recommended and suggested books
+- Search books from any page
+- Book pages with a summary, tags and key details
+- Audio player for each summary
+- My Library page for saved books
+- Choose-plan page with monthly and yearly options (payment is not connected)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Built with
 
-## Learn More
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Redux Toolkit · Firebase Auth and Firestore · Vercel
 
-To learn more about Next.js, take a look at the following resources:
+## Getting started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Requires Node 20.9 or newer (run `node -v` to check).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    git clone https://github.com/robertandersonux/summarist.git
+    cd summarist
+    npm install
+    npm run dev
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then open http://localhost:3000.
